@@ -1,6 +1,7 @@
 package dev.anderson.userapi.users.web;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.anderson.userapi.users.domain.UserDto;
 import dev.anderson.userapi.users.domain.UserService;
+import dev.anderson.userapi.users.exceptions.UserNotFoundExcepton;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
@@ -29,8 +31,14 @@ public class UserController {
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public UserDto update(@PathVariable Long id, @Valid @RequestBody UserDto dto) {
+	public UserDto update(@PathVariable Long id, @Valid @RequestBody UserDto dto) throws UserNotFoundExcepton {
 		return userservice.update(id, dto);
+	}
+	
+	@GetMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public UserDto get(@PathVariable Long id) throws UserNotFoundExcepton {
+		return userservice.get(id);
 	}
 	
 	
