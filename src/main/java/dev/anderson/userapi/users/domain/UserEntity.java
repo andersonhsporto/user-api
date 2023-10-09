@@ -58,4 +58,12 @@ public class UserEntity {
 	public void hashPassword(String hash) {
 		this.password = hash;
 	}
+
+	@Override
+	public String toString() {
+		return "UserEntity [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password
+				+ ", dateOfBirth=" + dateOfBirth + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+	}
+	
+	
 }

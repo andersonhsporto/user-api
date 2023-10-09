@@ -1,5 +1,7 @@
 package dev.anderson.userapi.users.web;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +43,10 @@ public class UserController {
 		return userservice.get(id);
 	}
 	
-	
-
+	@GetMapping
+	@ResponseStatus(HttpStatus.OK)
+	public List<UserDto> list() {
+		return userservice.list();
+	}
 
 }
