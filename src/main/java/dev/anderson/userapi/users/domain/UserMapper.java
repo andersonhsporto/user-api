@@ -7,7 +7,7 @@ import org.mapstruct.factory.Mappers;
 import org.mapstruct.MappingTarget;
 
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring")
 public interface UserMapper {
 	
 	UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
