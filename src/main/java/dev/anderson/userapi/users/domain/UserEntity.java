@@ -33,11 +33,11 @@ public class UserEntity {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "username", unique = true)
-	private String username;
-
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "username", unique = true)
+	private String username;
 
 	@Column(name = "password")
 	private String password;
