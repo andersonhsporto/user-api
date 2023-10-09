@@ -15,47 +15,41 @@ import lombok.Builder;
 @Builder
 public record UserDto(
 
-		@JsonProperty("id") Long id,
+    @JsonProperty("id") 
+    Long id,
 
-		@NotEmpty 
-		@JsonProperty("name") String name,
+    @NotEmpty 
+    @JsonProperty("name") 
+    String name,
 
-		@JsonProperty("username") String username,
+    @JsonProperty("username") 
+    String username,
 
-		@NotEmpty 
-		@JsonInclude(Include.NON_NULL) 
-		@JsonProperty("password") String password,
+    @NotEmpty 
+    @JsonInclude(Include.NON_NULL) 
+    @JsonProperty("password") 
+    String password,
 
-		@NotNull 
-		@JsonProperty("dateOfBirth") 
-		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate dateOfBirth,
-		
-		@JsonInclude(Include.NON_NULL)
-		LocalDateTime createdAt,
-		
-		@JsonInclude(Include.NON_NULL)
-		LocalDateTime updatedAt
-		)
-{
+    @NotNull 
+    @JsonProperty("dateOfBirth") 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") 
+    LocalDate dateOfBirth,
 
-	public static UserEntity toEntity(UserDto dto) {
-		return UserEntity.builder()
-				.name(dto.name)
-				.username(dto.username)
-				.password(dto.password)
-				.dateOfBirth(dto.dateOfBirth)
-				.build();
-	}
+    @JsonInclude(Include.NON_NULL) 
+    LocalDateTime createdAt,
 
-	public static UserDto fromEntity(UserEntity entity) {
-		return UserDto.builder()
-				.id(entity.getId())
-				.name(entity.getName())
-				.username(entity.getUsername())
-				.dateOfBirth(entity.getDateOfBirth())
-				.createdAt(entity.getCreatedAt())
-				.updatedAt(entity.getUpdatedAt())
-				.build();
-	}
+    @JsonInclude(Include.NON_NULL) 
+    LocalDateTime updatedAt
+    ) {
+  public static UserEntity toEntity(UserDto dto) {
+    return UserEntity.builder().name(dto.name).username(dto.username).password(dto.password)
+        .dateOfBirth(dto.dateOfBirth).build();
+  }
+
+  public static UserDto fromEntity(UserEntity entity) {
+    return UserDto.builder().id(entity.getId()).name(entity.getName())
+        .username(entity.getUsername()).dateOfBirth(entity.getDateOfBirth())
+        .createdAt(entity.getCreatedAt()).updatedAt(entity.getUpdatedAt()).build();
+  }
 
 }
