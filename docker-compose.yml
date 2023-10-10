@@ -9,10 +9,18 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_USER: "user"
       MYSQL_PASSWORD: "password"
-    ports:
-      - 3306:3306
     volumes:
       - my-db:/var/lib/mysql
+
+  app:
+    container_name: user-api-spring
+    build:
+      context: .
+    depends_on:
+      - database
+    ports:
+      - 8080:8080
+
 
 volumes:
   my-db:
