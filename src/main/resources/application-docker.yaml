@@ -1,13 +1,13 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://user-database-spring:3306/db?allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://user-database-spring:3306/db
     username: user
     password: password
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show_sql: true
 
   h2:
@@ -18,3 +18,9 @@ spring:
 server:
   servlet:
     context-path: /api/v1
+    
+    
+logging: 
+   level: 
+      com.zaxxer.hikari.hibernate.HikariConnectionProvider: DEBUG 
+      com.zaxxer.hikari: DEBUG
