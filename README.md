@@ -52,6 +52,24 @@ mvn spring-boot:run
 
 ```
 
+## Database Parameters
+
+For learning purposes, the parameters are hardcoded in the application
+and can be changed in
+the [application.yaml](https://github.com/andersonhsporto/user-api/blob/main/src/main/resources/application.yaml)
+file
+or [application-docker.yml](https://github.com/andersonhsporto/user-api/blob/main/src/main/resources/application-docker.yaml)
+in
+docker environment.
+
+| Parameter         | Default Value               | Description       |
+|-------------------|-----------------------------|-------------------|
+| Database Host     | localhost or docker service | Database host     |
+| Database Port     | 3306                        | Database port     |
+| Database Name     | db                          | Database name     |
+| Database Username | user                        | Database username |
+| Database Password | password                    | Database password |
+
 ## Endpoints
 
 The following endpoints are available:
@@ -96,27 +114,28 @@ curl --location --request POST 'http://localhost:8080/api/v1/users' \
 }'
 
 ```
+
 #### Json:
 
-```javascript
+```json
 {
-    "name": "John Doe",
-    "username": "johndoe",
-    "password": "123456",
-    "dateOfBirth": "01-01-2000"
+  "name": "John Doe",
+  "username": "johndoe",
+  "password": "123456",
+  "dateOfBirth": "01-01-2000"
 }
 ```
 
 #### Return:
 
-```javascript
+```json
 {
-     "id": 1, 
-     "name": "John Doe", 
-     "username": "johndoe",
-     "dateOfBirth": "01-01-2000",
-     "createdAt": "2021-10-10T00:00:00.000+00:00",
-     "updatedAt": "2021-10-10T00:00:00.000+00:00"
+  "id": 1,
+  "name": "John Doe",
+  "username": "johndoe",
+  "dateOfBirth": "01-01-2000",
+  "createdAt": "2021-10-10T00:00:00.000+00:00",
+  "updatedAt": "2021-10-10T00:00:00.000+00:00"
 }
 ```
 
@@ -140,14 +159,14 @@ curl --location --request PUT 'http://localhost:8080/api/v1/users/1' \
 
 #### Return:
 
-```javascript
+```json
 {
-     "id": 1, 
-     "name": "John Doe 2", 
-     "username": "johndoe2",
-     "dateOfBirth": "01-01-2000",
-     "createdAt": "2021-10-10T00:00:00.000+00:00",
-     "updatedAt": "2021-10-10T00:00:00.000+00:00"
+  "id": 1,
+  "name": "John Doe 2",
+  "username": "johndoe2",
+  "dateOfBirth": "01-01-2000",
+  "createdAt": "2021-10-10T00:00:00.000+00:00",
+  "updatedAt": "2021-10-10T00:00:00.000+00:00"
 }
 ```
 
@@ -164,14 +183,14 @@ curl --location --request GET 'http://localhost:8080/api/v1/users/1'
 
 #### Return:
 
-```javascript
+```json
 {
-     "id": 1, 
-     "name": "John Doe 2", 
-     "username": "johndoe2",
-     "dateOfBirth": "01-01-2000",
-     "createdAt": "2021-10-10T00:00:00.000+00:00",
-     "updatedAt": "2021-10-10T00:00:00.000+00:00"
+  "id": 1,
+  "name": "John Doe 2",
+  "username": "johndoe2",
+  "dateOfBirth": "01-01-2000",
+  "createdAt": "2021-10-10T00:00:00.000+00:00",
+  "updatedAt": "2021-10-10T00:00:00.000+00:00"
 }
 ```
 
@@ -188,24 +207,24 @@ curl --location --request GET 'http://localhost:8080/api/v1/users'
 
 #### Return:
 
-```javascript
+```json
 [
-    {
-        "id": 1, 
-        "name": "John Doe 2", 
-        "username": "johndoe2",
-        "dateOfBirth": "01-01-2000",
-        "createdAt": "2021-10-10T00:00:00.000+00:00",
-        "updatedAt": "2021-10-10T00:00:00.000+00:00"
-    },
-    {
-        "id": 2, 
-        "name": "John Doe 3", 
-        "username": "johndoe3",
-        "dateOfBirth": "01-01-2000",
-        "createdAt": "2021-10-10T00:00:00.000+00:00",
-        "updatedAt": "2021-10-10T00:00:00.000+00:00"
-    }
+  {
+    "id": 1,
+    "name": "John Doe 2",
+    "username": "johndoe2",
+    "dateOfBirth": "01-01-2000",
+    "createdAt": "2021-10-10T00:00:00.000+00:00",
+    "updatedAt": "2021-10-10T00:00:00.000+00:00"
+  },
+  {
+    "id": 2,
+    "name": "John Doe 3",
+    "username": "johndoe3",
+    "dateOfBirth": "01-01-2000",
+    "createdAt": "2021-10-10T00:00:00.000+00:00",
+    "updatedAt": "2021-10-10T00:00:00.000+00:00"
+  }
 ]
 ```
 
@@ -222,12 +241,12 @@ curl --location --request DELETE 'http://localhost:8080/api/v1/users/1'
 
 #### Return:
 
-```javascript
+```json
 204 No Content
 ```
 
 ## Contact Information
 
 If you have any questions, suggestions or comments, please contact me.
-through the [email](mailto:anderson.higo2@gmail.com) or 
+through the [email](mailto:anderson.higo2@gmail.com) or
 [linkedin](https://www.linkedin.com/in/andersonhsporto/).
