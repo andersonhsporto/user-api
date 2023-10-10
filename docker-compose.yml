@@ -2,7 +2,10 @@ version: "3.8"
 
 services:
   database:
+    container_name: user-database-spring
     image: mysql
+    networks:
+      - springboot-db-net
     restart: always
     environment:
       MYSQL_DATABASE: "db"
@@ -20,7 +23,12 @@ services:
       - database
     ports:
       - 8080:8080
+    networks:
+      - springboot-db-net
 
 
 volumes:
   my-db:
+
+networks:
+  springboot-db-net:
