@@ -18,19 +18,20 @@ public record UserDto(
     @JsonProperty("id") 
     Long id,
 
-    @NotEmpty 
+    @NotEmpty(message = "Name is required")
     @JsonProperty("name") 
     String name,
 
+    @NotEmpty(message = "Username is required")
     @JsonProperty("username") 
     String username,
 
-    @NotEmpty 
+    @NotEmpty(message = "Password is required")
     @JsonInclude(Include.NON_NULL) 
     @JsonProperty("password") 
     String password,
 
-    @NotNull 
+    @NotNull(message = "Date of birth is required")
     @JsonProperty("dateOfBirth") 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") 
     LocalDate dateOfBirth,
