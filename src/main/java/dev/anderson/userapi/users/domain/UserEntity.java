@@ -6,7 +6,6 @@ import java.util.Objects;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -30,40 +29,41 @@ import lombok.Setter;
 @Setter
 public class UserEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id")
+  private Long id;
 
-	@Column(name = "name", nullable = false)
-	private String name;
-	
-	@Column(name = "username", unique = true, nullable = false)
-	private String username;
+  @Column(name = "name", nullable = false)
+  private String name;
 
-	@Column(name = "password", nullable = false)
-	private String password;
+  @Column(name = "username", unique = true, nullable = false)
+  private String username;
 
-	@Column(name = "date_of_birth", nullable = false)
-	private LocalDate dateOfBirth;
+  @Column(name = "password", nullable = false)
+  private String password;
 
-	@CreatedDate
-	@Column(name = "created_at")
-	private LocalDateTime createdAt;
+  @Column(name = "date_of_birth", nullable = false)
+  private LocalDate dateOfBirth;
 
-	@LastModifiedDate
-	@Column(name = "updated_at")
-	private LocalDateTime updatedAt;
+  @CreatedDate
+  @Column(name = "created_at")
+  private LocalDateTime createdAt;
 
-	public void hashPassword(String hash) {
-		this.password = hash;
-	}
+  @LastModifiedDate
+  @Column(name = "updated_at")
+  private LocalDateTime updatedAt;
 
-	@Override
-	public String toString() {
-		return "UserEntity [id = " + id + ", name=" + name + ", username=" + username + ", password=" + password
-				+ ", dateOfBirth=" + dateOfBirth + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
-	}
+  public void hashPassword(String hash) {
+    this.password = hash;
+  }
+
+  @Override
+  public String toString() {
+    return "UserEntity [id = " + id + ", name=" + name + ", username=" + username + ", password="
+        + password + ", dateOfBirth=" + dateOfBirth + ", createdAt=" + createdAt + ", updatedAt="
+        + updatedAt + "]";
+  }
 
   @Override
   public int hashCode() {
@@ -84,5 +84,5 @@ public class UserEntity {
         && Objects.equals(name, other.name) && Objects.equals(password, other.password)
         && Objects.equals(updatedAt, other.updatedAt) && Objects.equals(username, other.username);
   }
-	
+
 }

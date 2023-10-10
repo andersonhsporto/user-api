@@ -23,7 +23,8 @@ public class UserService {
   }
 
   public UserDto update(Long id, @Valid UserDto dto) throws UserNotFoundExcepton {
-    UserEntity entity = userRepository.findById(id).orElseThrow(UserNotFoundExcepton::new);
+    UserEntity entity = userRepository.findById(id)
+        .orElseThrow(UserNotFoundExcepton::new);
 
     userMapper.updateFromDto(dto, entity);
     userRepository.save(entity);
@@ -31,7 +32,8 @@ public class UserService {
   }
 
   public UserDto get(Long id) throws UserNotFoundExcepton {
-    return userRepository.findById(id).map(UserDto::fromEntity)
+    return userRepository.findById(id)
+        .map(UserDto::fromEntity)
         .orElseThrow(UserNotFoundExcepton::new);
   }
 
@@ -43,7 +45,9 @@ public class UserService {
 
   @Transactional
   public void delete(Long id) throws UserNotFoundExcepton {
-    UserEntity entity = userRepository.findById(id).orElseThrow(UserNotFoundExcepton::new);
+    UserEntity entity = userRepository
+        .findById(id)
+        .orElseThrow(UserNotFoundExcepton::new);
 
     userRepository.delete(entity);
   }
