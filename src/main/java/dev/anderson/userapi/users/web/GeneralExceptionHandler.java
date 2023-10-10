@@ -1,32 +1,52 @@
 package dev.anderson.userapi.users.web;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import dev.anderson.userapi.users.exceptions.UserNotFoundExcepton;
 
 @RestControllerAdvice
-public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
-	
-	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			org.springframework.http.HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-		return super.handleMethodArgumentNotValid(ex, headers, HttpStatus.UNPROCESSABLE_ENTITY, request);
-	}
+public class GeneralExceptionHandler {
+  
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException ex) {
+      List<String> errors = ex.getBindingResult()
+              .getFieldErrors()
+              .stream()
+              .map(FieldError::getDefaultMessage).collect(Collectors.toList());
 
-	@ExceptionHandler(DataIntegrityViolationException.class)
-	private ResponseEntity<Object> handleConflict(DataIntegrityViolationException ex) {
-		return ResponseEntity.status(HttpStatus.CONFLICT).body("The user already exists, try again with a unique username");
-	}
-	
-	@ExceptionHandler(UserNotFoundExcepton.class)
-	private ResponseEntity<Object> handleUserNotFound(UserNotFoundExcepton ex) {
-	  return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-	}
+      return new ResponseEntity<>(getErrorsMap(errors), HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(DataIntegrityViolationException.class)
+  private ResponseEntity<Object> handleConflict(DataIntegrityViolationException ex) {
+    List<String> errors = Collections.singletonList("The user already exists, try again with a unique username");
+    
+    return new ResponseEntity<>(getErrorsMap(errors), HttpStatus.CONFLICT);
+  }
+
+  @ExceptionHandler(UserNotFoundExcepton.class)
+  private ResponseEntity<Map<String, List<String>>> handleUserNotFound(UserNotFoundExcepton ex) {
+    List<String> errors = Collections.singletonList(ex.getMessage());
+    
+    return new ResponseEntity<>(getErrorsMap(errors), HttpStatus.NOT_FOUND);
+  }
+
+  private Map<String, List<String>> getErrorsMap(List<String> errors) {
+    Map<String, List<String>> errorsMap = new HashMap<>();
+    
+    errorsMap.put("errors", errors);
+    return errorsMap;
+  }
 }
