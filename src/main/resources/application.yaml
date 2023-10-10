@@ -1,14 +1,14 @@
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:oauth2
-    username: sa
-    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://user-database-spring:3306/db?allowPublicKeyRetrieval=true&useSSL=false
+    username: user
+    password: password
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+    show_sql: true
 
   h2:
     console:
