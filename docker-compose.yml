@@ -6,6 +6,8 @@ services:
     image: mysql
     networks:
       - springboot-db-net
+    ports:
+      - 3306:3306
     restart: always
     environment:
       MYSQL_DATABASE: "db"

@@ -12,4 +12,4 @@ COPY --from=build /project/target/user-api-0.0.1-SNAPSHOT.jar /app/user-api-0.0.
 WORKDIR /app
 RUN chown -R javauser:javauser /app
 USER javauser
-CMD "java" "-jar" "user-api-0.0.1-SNAPSHOT.jar"
+CMD "java" "-jar" "user-api-0.0.1-SNAPSHOT.jar" "--spring.profiles.active=docker"
