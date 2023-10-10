@@ -61,9 +61,8 @@ public class UserEntity {
 
 	@Override
 	public String toString() {
-		return "UserEntity [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password
+		return "UserEntity [id = " + id + ", name=" + name + ", username=" + username + ", password=" + password
 				+ ", dateOfBirth=" + dateOfBirth + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-	
 	
 }
