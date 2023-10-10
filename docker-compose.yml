@@ -1,9 +1,7 @@
-version: "3.8"
-
 services:
   database:
     container_name: user-database-spring
-    image: mysql
+    image: "mysql:8.0-oracle"
     networks:
       - springboot-db-net
     ports:
@@ -15,22 +13,22 @@ services:
       MYSQL_USER: "user"
       MYSQL_PASSWORD: "password"
     volumes:
-      - my-db:/var/lib/mysql
+      - /data/spring-app
+      - "./script/generate.sql:/docker-entrypoint-initdb.d/1.sql"
 
   app:
     container_name: user-api-spring
     build:
       context: .
     depends_on:
-      - database
+      database:
+        condition: service_started
+        restart: true
     ports:
       - 8080:8080
     networks:
       - springboot-db-net
 
-
-volumes:
-  my-db:
-
 networks:
   springboot-db-net:
+    driver: bridge
