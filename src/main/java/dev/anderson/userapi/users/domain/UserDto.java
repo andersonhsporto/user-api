@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import dev.anderson.userapi.config.MultiDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -33,7 +35,7 @@ public record UserDto(
 
     @NotNull(message = "Date of birth is required")
     @JsonProperty("dateOfBirth") 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") 
+    @JsonDeserialize(using = MultiDateDeserializer.class)
     LocalDate dateOfBirth,
 
     @JsonInclude(Include.NON_NULL) 
