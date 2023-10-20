@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import dev.anderson.userapi.config.CustomDateSerializer;
 import dev.anderson.userapi.config.MultiDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -34,8 +36,9 @@ public record UserDto(
     String password,
 
     @NotNull(message = "Date of birth is required")
-    @JsonProperty("dateOfBirth") 
+    @JsonProperty("dateOfBirth")
     @JsonDeserialize(using = MultiDateDeserializer.class)
+    @JsonSerialize(using = CustomDateSerializer.class)
     LocalDate dateOfBirth,
 
     @JsonInclude(Include.NON_NULL) 

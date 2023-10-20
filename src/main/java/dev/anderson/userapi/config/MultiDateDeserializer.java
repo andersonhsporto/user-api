@@ -18,8 +18,11 @@ public class MultiDateDeserializer extends StdDeserializer<LocalDate> {
   private static final long serialVersionUID = 1L;
 
   private static final DateTimeFormatter[] DATE_FORMATTERS =
-      new DateTimeFormatter[] {DateTimeFormatter.ofPattern("dd-MM-yyyy"),
-          DateTimeFormatter.ISO_OFFSET_DATE_TIME};
+      new DateTimeFormatter[] {
+          DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+          DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+          DateTimeFormatter.ISO_OFFSET_DATE_TIME
+          };
 
   public MultiDateDeserializer() {
     this(null);
