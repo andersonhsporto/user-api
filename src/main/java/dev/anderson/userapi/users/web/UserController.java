@@ -1,7 +1,10 @@
 package dev.anderson.userapi.users.web;
 
 import java.util.List;
+
+import dev.anderson.userapi.config.CreateValidation;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.anderson.userapi.users.domain.UserDto;
 import dev.anderson.userapi.users.domain.UserService;
 import dev.anderson.userapi.users.exceptions.UserNotFoundExcepton;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -28,13 +30,13 @@ public class UserController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public UserDto create(@Valid @RequestBody UserDto dto) {
+	public UserDto create(@Validated(CreateValidation.class) @RequestBody UserDto dto) {
 		return userservice.create(dto);
 	}
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public UserDto update(@PathVariable Long id, @Valid @RequestBody UserDto dto) throws UserNotFoundExcepton {
+	public UserDto update(@PathVariable Long id, @Validated @RequestBody UserDto dto) throws UserNotFoundExcepton {
 		return userservice.update(id, dto);
 	}
 	

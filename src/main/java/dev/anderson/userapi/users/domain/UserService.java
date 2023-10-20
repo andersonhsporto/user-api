@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import dev.anderson.userapi.users.exceptions.UserNotFoundExcepton;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -22,7 +21,7 @@ public class UserService {
     return UserDto.fromEntity(entity);
   }
 
-  public UserDto update(Long id, @Valid UserDto dto) throws UserNotFoundExcepton {
+  public UserDto update(Long id, UserDto dto) throws UserNotFoundExcepton {
     UserEntity entity = userRepository.findById(id)
         .orElseThrow(UserNotFoundExcepton::new);
 

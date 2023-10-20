@@ -3,11 +3,11 @@ package dev.anderson.userapi.users.domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import dev.anderson.userapi.config.CreateValidation;
 import dev.anderson.userapi.config.CustomDateSerializer;
 import dev.anderson.userapi.config.MultiDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,7 +30,9 @@ public record UserDto(
     @JsonProperty("username") 
     String username,
 
-    @NotEmpty(message = "Password is required")
+    @NotEmpty(message = "Password is required", groups = {
+            CreateValidation.class
+    })
     @JsonInclude(Include.NON_NULL) 
     @JsonProperty("password") 
     String password,
